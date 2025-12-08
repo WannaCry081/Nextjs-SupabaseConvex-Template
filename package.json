@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "convex:dev": "pnpm dlx convex dev",
+    "convex:dashboard": "pnpm dlx convex dashboard"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
