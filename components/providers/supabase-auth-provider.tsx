@@ -23,30 +23,30 @@ const SupabaseAuthContext = createContext<SupabaseAuthContextValue | undefined>(
 export const SupabaseAuthProvider = ({ children }: PropsWithChildren) => {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
   const supabase = getSupabaseClient();
 
   useEffect(() => {
-    let mounted = true;
+    const abort = new AbortController();
 
-    // Get initial session
     supabase.auth
       .getSession()
       .then(({ data }) => {
-        if (!mounted) return;
+        if (abort.signal.aborted) return;
+
         setSession(data.session ?? null);
         setIsLoading(false);
       })
       .catch(() => setIsLoading(false));
 
-    // Subscribe to changes
     const { data: subscription } = supabase.auth.onAuthStateChange(
       (_event, newSession) => {
-        setSession(newSession);
+        if (!abort.signal.aborted) setSession(newSession);
       }
     );
 
     return () => {
-      mounted = false;
+      abort.abort();
       subscription.subscription.unsubscribe();
     };
   }, [supabase]);
