@@ -1,7 +1,12 @@
 import { type NextRequest } from "next/server";
 
+// Utils
+import { updateSession } from "@/lib/supabase/middleware";
+
+const PROTECTED_ROUTES: string[] = ["/dashboard/*"];
+
 export async function proxy(request: NextRequest) {
-  return null;
+  return await updateSession(request, PROTECTED_ROUTES);
 }
 
 export const config = {
