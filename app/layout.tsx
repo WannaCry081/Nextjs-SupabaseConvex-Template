@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+
+// Providers
+import { SupabaseAuthProvider } from "@/components/providers/supabase-auth-provider";
+import { ConvexSupabaseProvider } from "@/components/providers/convex-supabase-provider";
+
+// Styles
+import "@/app/styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +33,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SupabaseAuthProvider>
+          <ConvexSupabaseProvider>{children}</ConvexSupabaseProvider>
+        </SupabaseAuthProvider>
       </body>
     </html>
   );
