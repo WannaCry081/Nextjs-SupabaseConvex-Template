@@ -4,14 +4,14 @@ import { Pool } from "pg";
 // Schemas
 // import * as schema from "./schemas";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("Missing 'DATABASE_URL' env var");
+if (!process.env.CONNECTION_STRING) {
+  throw new Error("Missing 'CONNECTION_STRING' env var");
 }
 
 const isProduction = process.env.NODE_ENV === "production";
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.CONNECTION_STRING,
   ssl: isProduction ? { rejectUnauthorized: false } : false,
 });
 
