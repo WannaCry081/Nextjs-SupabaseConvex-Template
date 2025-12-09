@@ -2,8 +2,8 @@ import type { Config } from "drizzle-kit";
 import "dotenv/config";
 
 export default {
-  schema: "./data/schemas",
-  out: "./data/migrations",
+  schema: "./drizzle/schemas",
+  out: "./drizzle/migrations",
   dialect: "postgresql",
   dbCredentials: {
     url: process.env.CONNECTION_STRING!,
