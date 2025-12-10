@@ -1,7 +1,17 @@
 "use client";
 
-import { useCallback, useMemo, PropsWithChildren } from "react";
+import {
+  useCallback,
+  useMemo,
+  PropsWithChildren,
+  useState,
+  useEffect,
+} from "react";
+
 import { ConvexProviderWithAuth, ConvexReactClient } from "convex/react";
+import { ConvexQueryClient } from "@convex-dev/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { useSupabaseAuth } from "./supabase-auth-provider";
 
 type UseAuthResult = {
@@ -33,9 +43,32 @@ export const useAuthFromSupabase = (): UseAuthResult => {
 };
 
 export const ConvexSupabaseProvider = ({ children }: PropsWithChildren) => {
+  const [{ queryClient, convexQueryClient }] = useState(() => {
+    const convexQueryClient = new ConvexQueryClient(convex);
+    const tanstackQueryClient = new QueryClient({
+      defaultOptions: {
+        queries: {
+          queryKeyHashFn: convexQueryClient.hashFn(),
+          queryFn: convexQueryClient.queryFn(),
+        },
+      },
+    });
+
+    convexQueryClient.connect(tanstackQueryClient);
+
+    return { queryClient: tanstackQueryClient, convexQueryClient };
+  });
+
+  useEffect(() => {
+    return () => {
+      convexQueryClient.unsubscribe?.();
+      queryClient.clear();
+    };
+  }, [convexQueryClient, queryClient]);
+
   return (
     <ConvexProviderWithAuth client={convex} useAuth={useAuthFromSupabase}>
-      {children}
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </ConvexProviderWithAuth>
   );
 };
