@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 // Providers
 import { SupabaseAuthProvider } from "@/components/providers/supabase-auth-provider";
-import { ConvexSupabaseProvider } from "@/components/providers/convex-supabase-provider";
+import { ConvexSupabaseProvider } from "@/components/providers/convex-query-provider";
 
 // Styles
 import "@/app/styles/globals.css";

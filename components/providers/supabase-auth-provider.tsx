@@ -1,24 +1,15 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  PropsWithChildren,
-} from "react";
+import { useEffect, useState, PropsWithChildren } from "react";
 
+// Context
+import { SupabaseAuthContext } from "@/hooks/useSupabaseAuthContext";
+
+// Types
 import type { Session } from "@supabase/supabase-js";
+
+// Utils
 import { getSupabaseClient } from "@/lib/supabase/client";
-
-type SupabaseAuthContextValue = {
-  session: Session | null;
-  isLoading: boolean;
-};
-
-const SupabaseAuthContext = createContext<SupabaseAuthContextValue | undefined>(
-  undefined
-);
 
 export const SupabaseAuthProvider = ({ children }: PropsWithChildren) => {
   const [session, setSession] = useState<Session | null>(null);
@@ -56,12 +47,4 @@ export const SupabaseAuthProvider = ({ children }: PropsWithChildren) => {
       {children}
     </SupabaseAuthContext.Provider>
   );
-};
-
-export const useSupabaseAuth = () => {
-  const ctx = useContext(SupabaseAuthContext);
-  if (!ctx) {
-    throw new Error("useSupabaseAuth must be used inside SupabaseAuthProvider");
-  }
-  return ctx;
 };
