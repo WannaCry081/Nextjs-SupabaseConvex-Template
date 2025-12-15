@@ -11,7 +11,7 @@ import { useSupabaseAuth } from "@/hooks/useSupabaseAuth";
 // Services
 import { convex, getConvexQueryClient } from "@/services/convex-query-client";
 
-export const ConvexSupabaseProvider = ({ children }: PropsWithChildren) => {
+export const ConvexQueryProvider = ({ children }: PropsWithChildren) => {
   const queryClient = getConvexQueryClient();
 
   return (
