@@ -10,9 +10,6 @@ export async function POST() {
   revalidatePath("/", "layout");
 
   return NextResponse.redirect(
-    new URL(
-      "/auth/login",
-      process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-    )
+    new URL("/auth/login", process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000")
   );
 }

@@ -30,11 +30,9 @@ export const SupabaseAuthProvider = ({ children }: PropsWithChildren) => {
       })
       .catch(() => setIsLoading(false));
 
-    const { data: subscription } = supabase.auth.onAuthStateChange(
-      (_event, newSession) => {
-        if (!abort.signal.aborted) setSession(newSession);
-      }
-    );
+    const { data: subscription } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      if (!abort.signal.aborted) setSession(newSession);
+    });
 
     return () => {
       abort.abort();
