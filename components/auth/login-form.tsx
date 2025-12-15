@@ -26,9 +26,7 @@ export const LoginForm = () => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [message, setMessage] = useState<{ type: string; text: string } | null>(
-    null
-  );
+  const [message, setMessage] = useState<{ type: string; text: string } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,10 +67,7 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit}>
         <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center">
-            <a
-              href="#"
-              className="flex flex-col items-center gap-2 font-medium"
-            >
+            <a href="#" className="flex flex-col items-center gap-2 font-medium">
               <div className="flex size-8 items-center justify-center rounded-md">
                 <GalleryVerticalEnd className="size-6" />
               </div>
@@ -80,8 +75,7 @@ export const LoginForm = () => {
             </a>
             <h1 className="text-xl font-bold">Welcome to Acme Inc.</h1>
             <FieldDescription>
-              Don&apos;t have an account?{" "}
-              <Link href="/auth/register">Sign up</Link>
+              Don&apos;t have an account? <Link href="/auth/register">Sign up</Link>
             </FieldDescription>
           </div>
           {message?.text !== "" && <p>{message?.text}</p>}
@@ -110,11 +104,7 @@ export const LoginForm = () => {
             </Field>
             <Activity mode={message !== null ? "visible" : "hidden"}>
               <Alert>
-                {message?.type === "Success" ? (
-                  <CheckIcon />
-                ) : (
-                  <CircleAlertIcon />
-                )}
+                {message?.type === "Success" ? <CheckIcon /> : <CircleAlertIcon />}
                 <AlertTitle>{message?.type}</AlertTitle>
                 <AlertDescription>{message?.text}</AlertDescription>
               </Alert>
@@ -145,8 +135,8 @@ export const LoginForm = () => {
         </FieldGroup>
       </form>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our <a href="#">Terms of Service</a> and{" "}
+        <a href="#">Privacy Policy</a>.
       </FieldDescription>
     </div>
   );

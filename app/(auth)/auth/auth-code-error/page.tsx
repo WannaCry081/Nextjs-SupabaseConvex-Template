@@ -3,9 +3,7 @@ export default function AuthCodeError() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
       <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-lg">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-            Authentication Error
-          </h2>
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900">Authentication Error</h2>
           <p className="mt-4 text-gray-600">
             There was an error authenticating your account. Please try again.
           </p>
