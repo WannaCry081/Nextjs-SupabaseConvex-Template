@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 // Providers
 import { SupabaseAuthProvider } from "@/components/providers/supabase-auth-provider";
-import { ConvexSupabaseProvider } from "@/components/providers/convex-supabase-provider";
+import { ConvexSupabaseProvider } from "@/components/providers/convex-query-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 // Styles
 import "@/app/styles/globals.css";
@@ -29,12 +30,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SupabaseAuthProvider>
-          <ConvexSupabaseProvider>{children}</ConvexSupabaseProvider>
+          <ConvexSupabaseProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </ConvexSupabaseProvider>
         </SupabaseAuthProvider>
       </body>
     </html>

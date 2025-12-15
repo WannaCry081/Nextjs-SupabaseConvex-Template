@@ -27,9 +27,7 @@ export const RegisterForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [rePassword, setRePassword] = useState<string>("");
-  const [message, setMessage] = useState<{ type: string; text: string } | null>(
-    null
-  );
+  const [message, setMessage] = useState<{ type: string; text: string } | null>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -83,10 +81,7 @@ export const RegisterForm = () => {
       <form onSubmit={handleSubmit}>
         <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center">
-            <a
-              href="#"
-              className="flex flex-col items-center gap-2 font-medium"
-            >
+            <a href="#" className="flex flex-col items-center gap-2 font-medium">
               <div className="flex size-8 items-center justify-center rounded-md">
                 <GalleryVerticalEnd className="size-6" />
               </div>
@@ -133,11 +128,7 @@ export const RegisterForm = () => {
             </Field>
             <Activity mode={message !== null ? "visible" : "hidden"}>
               <Alert>
-                {message?.type === "Success" ? (
-                  <CheckIcon />
-                ) : (
-                  <CircleAlertIcon />
-                )}
+                {message?.type === "Success" ? <CheckIcon /> : <CircleAlertIcon />}
                 <AlertTitle>{message?.type}</AlertTitle>
                 <AlertDescription>{message?.text}</AlertDescription>
               </Alert>
@@ -168,8 +159,8 @@ export const RegisterForm = () => {
         </FieldGroup>
       </form>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our <a href="#">Terms of Service</a> and{" "}
+        <a href="#">Privacy Policy</a>.
       </FieldDescription>
     </div>
   );
