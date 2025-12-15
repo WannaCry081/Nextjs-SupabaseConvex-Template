@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 // Providers
 import { SupabaseAuthProvider } from "@/components/providers/supabase-auth-provider";
-import { ConvexSupabaseProvider } from "@/components/providers/convex-query-provider";
+import { ConvexQueryProvider } from "@/components/providers/convex-query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 
 // Styles
@@ -33,7 +33,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SupabaseAuthProvider>
-          <ConvexSupabaseProvider>
+          <ConvexQueryProvider>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -42,7 +42,7 @@ export default function RootLayout({
             >
               {children}
             </ThemeProvider>
-          </ConvexSupabaseProvider>
+          </ConvexQueryProvider>
         </SupabaseAuthProvider>
       </body>
     </html>
